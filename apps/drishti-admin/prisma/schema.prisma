@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id           String    @id @default(cuid())
+  name         String
+  phone        String?
+  email        String?
+  source       String    @default("Website")
+  status       String    @default("New")
+  notes        String?
+  followUpDate DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Customer {
+  id            String    @id @default(cuid())
+  name          String
+  phone         String?
+  email         String?
+  familyDetails String?
+  birthdays     String?
+  anniversaries String?
+  notes         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  bookings      Booking[]
+}
+
+model Booking {
+  id              String   @id @default(cuid())
+  customerId      String
+  type            String
+  startDate       DateTime
+  endDate         DateTime
+  equipmentNeeded String?
+  totalAmount     Float    @default(0)
+  advancePaid     Float    @default(0)
+  status          String   @default("Pending")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  customer        Customer @relation(fields: [customerId], references: [id])
+  assignments     Assignment[]
+}
+
+model Document {
+  id        String   @id
+  entityId  String
+  gcsUrl    String
+  createdAt DateTime @default(now())
+}
+
+model UserAccount {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  phone     String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Staff {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  phone     String   @unique
+  role        String   @default("Admin")
+  designation String   @default("Staff")
+  password    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  assignments Assignment[]
+  announcements Announcement[]
+}
+
+model Assignment {
+  id        String   @id @default(cuid())
+  bookingId String
+  staffId   String
+  role      String   // Specific role for this shoot
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  booking   Booking  @relation(fields: [bookingId], references: [id])
+  staff     Staff    @relation(fields: [staffId], references: [id])
+}
+
+model Announcement {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  author    Staff    @relation(fields: [authorId], references: [id])
+}

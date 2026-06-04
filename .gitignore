@@ -1,0 +1,10 @@
+node_modules
+.next
+.turbo
+*.log
+.DS_Store
+.env
+.env.local
+apps/aureum-studio/public/*.jpg
+apps/aureum-studio/public/*.png
+apps/aureum-studio/public/studio-tour/*.jpg
