@@ -1,7 +1,1 @@
-const config = {
-  plugins: {
-    "@tailwindcss/postcss": {},
-  },
-};
-
-export default config;
+// This file has been intentionally removed to use root postcss config
