@@ -10,10 +10,10 @@ interface ChatBotProps {
 }
 
 export default function ChatBot({ isOpen, onClose }: ChatBotProps) {
-  const { messages, status, sendMessage } = useChat();
+  const { messages, status, sendMessage, setMessages } = useChat();
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  
+
   const isLoading = status === 'streaming' || status === 'submitted';
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,12 +46,22 @@ export default function ChatBot({ isOpen, onClose }: ChatBotProps) {
             <p className="text-[#8a8278] text-[10px] 2xl:text-xs uppercase tracking-widest">Online</p>
           </div>
         </div>
-        <button 
-          onClick={onClose}
-          className="p-2 hover:bg-white/5 rounded-full transition-colors text-gray-400 hover:text-white"
-        >
-          <X size={18} />
-        </button>
+        <div className="flex items-center gap-2">
+          {messages.length > 0 && (
+            <button 
+              onClick={() => setMessages([])}
+              className="text-[10px] sm:text-xs text-gray-400 hover:text-white hover:bg-white/5 px-2 py-1 rounded transition-colors"
+            >
+              Clear
+            </button>
+          )}
+          <button 
+            onClick={onClose}
+            className="p-2 hover:bg-white/5 rounded-full transition-colors text-gray-400 hover:text-white"
+          >
+            <X size={18} />
+          </button>
+        </div>
       </div>
 
           {/* Messages */}
@@ -75,7 +85,7 @@ export default function ChatBot({ isOpen, onClose }: ChatBotProps) {
                     ? 'bg-[#f2ca50] text-black rounded-tr-sm' 
                     : 'bg-[#1a1a1a] text-[#e5e2e1] border border-white/5 rounded-tl-sm'
                 }`}>
-                  {m.parts?.map((p: any) => p.type === 'text' ? p.text : null)}
+                  {m.content || (m.parts?.map((p: any) => p.type === 'text' ? p.text : null))}
                 </div>
               </div>
             ))}
