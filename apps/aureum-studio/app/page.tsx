@@ -183,7 +183,7 @@ export default function Home() {
         <div className="flex justify-between items-center px-4 md:px-margin-desktop max-w-container mx-auto">
           {/* Logo & Brand */}
           <div className="flex items-center gap-2 md:gap-4">
-            <img alt="Drishti Studios Logo" className="hidden md:block h-6 w-6 md:h-8 md:w-8 object-contain" src="/drishti_logo.png" />
+            <img alt="Drishti Studios Logo" className="h-6 w-6 md:h-8 md:w-8 object-contain" src="/drishti_logo.png" />
             <span className="font-display text-lg md:text-3xl tracking-tighter text-primary">
               DRISHTI STUDIOS
             </span>
