@@ -17,9 +17,6 @@ const sans = Montserrat({
 export const metadata: Metadata = {
   title: "Drishti Studios | Premium Creative Studio",
   description: "The Art of Observation. Premium luxury creative studio specializing in cinematography, photography, post production, and art direction.",
-  icons: {
-    icon: "/drishti_logo.png",
-  },
 };
 
 export default function RootLayout({
