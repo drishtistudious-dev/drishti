@@ -896,9 +896,9 @@ export default function Home() {
               © {new Date().getFullYear()} DRISHTI STUDIOS. ALL RIGHTS RESERVED.
             </span>
             <div className="flex gap-3">
-              <a href="#" className="font-sans text-[9px] text-[#666] hover:text-[#d4af37] transition-colors">PRIVACY</a>
+              <a href="/privacy" className="font-sans text-[9px] text-[#666] hover:text-[#d4af37] transition-colors">PRIVACY</a>
               <span className="text-[#666] text-[9px]">|</span>
-              <a href="#" className="font-sans text-[9px] text-[#666] hover:text-[#d4af37] transition-colors">TERMS</a>
+              <a href="/terms" className="font-sans text-[9px] text-[#666] hover:text-[#d4af37] transition-colors">TERMS</a>
             </div>
           </div>
         </div>
@@ -995,10 +995,10 @@ export default function Home() {
               © {new Date().getFullYear()} DRISHTI STUDIOS. ALL RIGHTS RESERVED.
             </span>
             <div className="flex gap-8">
-              <a className="font-sans text-body-md text-on-surface-variant/60 hover:text-primary transition-colors" href="#">
+              <a className="font-sans text-body-md text-on-surface-variant/60 hover:text-primary transition-colors" href="/privacy">
                 PRIVACY
               </a>
-              <a className="font-sans text-body-md text-on-surface-variant/60 hover:text-primary transition-colors" href="#">
+              <a className="font-sans text-body-md text-on-surface-variant/60 hover:text-primary transition-colors" href="/terms">
                 TERMS
               </a>
             </div>
