@@ -5,8 +5,6 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
-  // Keep existing options (if any)
-}
   /* config options here */
 };
 
