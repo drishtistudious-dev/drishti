@@ -183,7 +183,7 @@ export default function Home() {
         <div className="flex justify-between items-center px-4 md:px-margin-desktop max-w-container mx-auto">
           {/* Logo & Brand */}
           <div className="flex items-center gap-2 md:gap-4">
-            <img alt="Drishti Studios Logo" className="h-6 w-6 md:h-8 md:w-8 object-contain" src="/drishti_logo.png" />
+            <img alt="Drishti Studios Logo" className="hidden md:block h-6 w-6 md:h-8 md:w-8 object-contain" src="/drishti_logo.png" />
             <span className="font-display text-lg md:text-3xl tracking-tighter text-primary">
               DRISHTI STUDIOS
             </span>
@@ -218,7 +218,7 @@ export default function Home() {
               CONTACT
             </a>
             <a
-              href="http://localhost:3002"
+              href="https://client.drishtistudios.in/"
               target="_blank"
               rel="noopener noreferrer"
               className="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300"
@@ -229,7 +229,7 @@ export default function Home() {
 
           <div className="flex items-center gap-3 md:gap-0">
             <a
-              href="http://localhost:3002"
+              href="https://client.drishtistudios.in/"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#d4af37] text-black px-4 py-2 md:px-6 md:py-2.5 font-label-md text-[9px] md:text-label-md tracking-widest hover:bg-white transition-all duration-300 font-bold uppercase"
@@ -795,7 +795,7 @@ export default function Home() {
             Get in touch with our creative director to schedule a consultation, enquire about rates, and explore shoot calendars.
           </p>
           <a
-            href="http://localhost:3002"
+            href="https://client.drishtistudios.in/"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-on-primary text-primary hover:bg-white hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] px-12 py-5 font-label-md text-label-md tracking-[0.2em] hover:scale-105 transition-all duration-300 inline-block uppercase rounded-sm"
@@ -879,7 +879,7 @@ export default function Home() {
                 WORKS
                 <ChevronRight size={16} className="text-[#d4af37]" />
               </a>
-              <a href="http://localhost:3002" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between py-4 border-b border-white/5 font-sans text-[13px] text-[#a39f98] hover:text-[#d4af37] tracking-wider transition-colors">
+              <a href="https://client.drishtistudios.in/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between py-4 border-b border-white/5 font-sans text-[13px] text-[#a39f98] hover:text-[#d4af37] tracking-wider transition-colors">
                 CLIENT PORTAL
                 <ChevronRight size={16} className="text-[#d4af37]" />
               </a>
@@ -979,7 +979,7 @@ export default function Home() {
             <a href="#portfolio" className="font-sans text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300">
               WORKS
             </a>
-            <a href="http://localhost:3002" target="_blank" rel="noopener noreferrer" className="font-sans text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300">
+            <a href="https://client.drishtistudios.in/" target="_blank" rel="noopener noreferrer" className="font-sans text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300">
               CLIENT PORTAL
             </a>
           </div>

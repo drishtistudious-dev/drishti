@@ -63,7 +63,7 @@ export default function LoginPage() {
       <div className="relative z-10 w-full max-w-md px-6 py-12 flex flex-col items-center animate-fade-in-up">
         {/* Top Back Link */}
         <a 
-          href="http://localhost:3001" 
+          href="https://drishtistudios.in/" 
           className="inline-flex items-center gap-2 mb-10 text-[#a09888] hover:text-[#f2ca50] transition-colors text-[9px] tracking-[0.2em] font-semibold uppercase"
         >
           <ArrowLeft size={12} strokeWidth={2.5} />
@@ -82,11 +82,7 @@ export default function LoginPage() {
               unoptimized
             />
           </div>
-          <div className="inline-flex items-center gap-1.5 mb-2">
-            <Sparkles size={10} className="text-[#f2ca50]" />
-            <span className="text-[9px] text-[#f2ca50] tracking-[0.3em] font-bold uppercase">Client Experience</span>
-            <Sparkles size={10} className="text-[#f2ca50]" />
-          </div>
+
           <h1 className="font-display text-4xl text-[#e5e2e1] font-normal tracking-tight text-center">
             Drishti <span className="italic font-light text-[#f2ca50]">Studios</span>
           </h1>

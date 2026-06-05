@@ -139,7 +139,7 @@ export default function StudioTour() {
       {/* Navigation Overlay */}
       <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-outline-variant/20">
         <Link href="/" className="flex items-center gap-4 group">
-          <img alt="Drishti Studios Logo" className="h-8 w-8 object-contain" src="/drishti_logo.png" />
+          <img alt="Drishti Studios Logo" className="hidden md:block h-8 w-8 object-contain" src="/drishti_logo.png" />
           <span className="font-display text-2xl tracking-tighter text-primary uppercase">
             Drishti Studios
           </span>
