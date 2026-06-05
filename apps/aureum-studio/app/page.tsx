@@ -296,7 +296,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="md:col-span-7 relative flex justify-center md:justify-end">
+          <div className="md:col-span-7 relative flex justify-center">
             <div className="relative group max-w-lg overflow-hidden rounded-sm glass-card p-4 light-leak-border">
               <img
                 src="/studio-tour/tour-2.jpeg"
