@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 export default async function BookingsPage() {
   const bookings = await prisma.booking.findMany({
-    orderBy: { shootDate: "asc" },
+    orderBy: { startDate: "asc" },
     include: { customer: true },
   });
 
@@ -16,7 +16,7 @@ export default async function BookingsPage() {
         <table className="w-full text-left text-sm">
           <thead className="bg-[#1a1a1a] text-gray-400 uppercase tracking-wider text-xs">
             <tr>
-              <th className="px-4 py-3">Title</th>
+              <th className="px-4 py-3">Type</th>
               <th className="px-4 py-3">Customer</th>
               <th className="px-4 py-3">Shoot date</th>
               <th className="px-4 py-3">Status</th>
@@ -32,12 +32,12 @@ export default async function BookingsPage() {
             ) : (
               bookings.map((booking) => (
                 <tr key={booking.id} className="border-t border-[#333]">
-                  <td className="px-4 py-3 text-white">{booking.title}</td>
+                  <td className="px-4 py-3 text-white">{booking.type}</td>
                   <td className="px-4 py-3 text-gray-400">
                     {booking.customer?.name ?? "—"}
                   </td>
                   <td className="px-4 py-3 text-gray-400">
-                    {format(booking.shootDate, "MMM d, yyyy")}
+                    {format(booking.startDate, "MMM d, yyyy")}
                   </td>
                   <td className="px-4 py-3">
                     <span className="rounded-full bg-[#d4af37]/20 px-2 py-1 text-xs text-[#d4af37]">

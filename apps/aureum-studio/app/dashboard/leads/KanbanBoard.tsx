@@ -3,14 +3,7 @@
 import { useTransition } from "react";
 import { updateLeadStatus, type LeadStatus } from "./actions";
 
-type Lead = {
-  id: string;
-  name: string;
-  email: string;
-  status: string;
-  notes: string | null;
-  createdAt: Date;
-};
+import type { Lead } from "@prisma/client";
 
 const columns: LeadStatus[] = [
   "New",
