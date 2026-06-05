@@ -126,7 +126,29 @@ export default function Home() {
   };
 
   return (
-    <div className={`relative min-h-screen bg-surface selection:bg-primary/30 selection:text-white overflow-hidden font-sans ${mouseMoved ? "md:cursor-none" : ""}`}>
+    <main className={`relative min-h-screen bg-surface selection:bg-primary/30 selection:text-white overflow-hidden font-sans ${mouseMoved ? "md:cursor-none" : ""}`}>
+      {/* SEO JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: "Drishti Studios",
+            image: "https://drishtistudios.in/drishti_logo.png",
+            "@id": "https://drishtistudios.in",
+            url: "https://drishtistudios.in",
+            telephone: "",
+            priceRange: "$$$",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "India",
+              addressCountry: "IN"
+            },
+            description: "Premium luxury creative studio specializing in cinematography, photography, post production, and art direction."
+          })
+        }}
+      />
       {/* Custom Cursor */}
       {mouseMoved && (
         <>
@@ -1005,6 +1027,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }

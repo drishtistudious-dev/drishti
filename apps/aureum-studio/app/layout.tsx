@@ -15,8 +15,46 @@ const sans = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Drishti Studios | Premium Creative Studio",
+  metadataBase: new URL("https://drishtistudios.in"),
+  title: {
+    default: "Drishti Studios | Premium Creative Studio",
+    template: "%s | Drishti Studios",
+  },
   description: "The Art of Observation. Premium luxury creative studio specializing in cinematography, photography, post production, and art direction.",
+  keywords: ["luxury photography", "cinematography", "creative studio", "wedding photography", "post production", "art direction", "Drishti Studios"],
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: "https://drishtistudios.in",
+    siteName: "Drishti Studios",
+    title: "Drishti Studios | Premium Creative Studio",
+    description: "Premium luxury creative studio specializing in cinematography, photography, and art direction.",
+    images: [
+      {
+        url: "/drishti_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Drishti Studios Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Drishti Studios | Premium Creative Studio",
+    description: "Premium luxury creative studio specializing in cinematography, photography, and art direction.",
+    images: ["/drishti_logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
