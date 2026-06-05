@@ -199,8 +199,8 @@ export default function StudioTour() {
                 <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/30 via-background to-background pointer-events-none" />
 
                 {/* Left: Gallery Framed Image */}
-                <div className="relative z-10 w-full h-[45%] md:h-full md:w-[55%] flex items-center justify-center p-6 md:p-12 lg:p-16">
-                  <div className="relative w-full h-full flex items-center justify-center p-3 md:p-4 bg-white/5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-md">
+                <div className="relative z-10 w-full h-[35%] sm:h-[40%] md:h-full md:w-[55%] flex items-center justify-center p-4 md:p-12 lg:p-16">
+                  <div className="relative w-full h-full flex items-center justify-center p-2 md:p-4 bg-white/5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-md">
                     <img
                       src={section.image}
                       alt={section.title}
@@ -210,40 +210,40 @@ export default function StudioTour() {
                 </div>
 
                 {/* Right: Content */}
-                <div className="relative z-10 w-full h-[55%] md:h-full md:w-[45%] flex flex-col justify-center px-6 md:px-12 py-8">
-                  <div className="flex items-center gap-4 mb-4 md:mb-6">
-                    <span className="font-label-md text-primary tracking-widest uppercase">
+                <div className="relative z-10 w-full h-[65%] sm:h-[60%] md:h-full md:w-[45%] flex flex-col justify-start md:justify-center px-5 py-5 sm:px-8 sm:py-6 md:px-12 md:py-8 overflow-y-auto scrollbar-hide">
+                  <div className="flex items-center gap-3 md:gap-4 mb-2 md:mb-6">
+                    <span className="font-label-md text-[10px] md:text-sm text-primary tracking-widest uppercase">
                       {section.phase}
                     </span>
                     <div className="h-px bg-primary/40 flex-1 max-w-[50px]" />
                   </div>
 
-                  <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-on-surface mb-4 leading-tight">
+                  <h2 className="font-display text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-on-surface mb-2 md:mb-4 leading-tight">
                     {section.title}
                   </h2>
                   
-                  <p className="font-body text-on-surface/70 text-sm md:text-base mb-8 max-w-md">
+                  <p className="font-body text-on-surface/70 text-[11px] sm:text-xs md:text-base mb-4 md:mb-8 max-w-md leading-relaxed">
                     {section.description}
                   </p>
 
-                  <div className="mt-auto md:mt-8 space-y-6">
+                  <div className="mt-2 md:mt-auto md:space-y-6 space-y-4">
                     <div>
-                      <span className="font-label-sm text-primary mb-1 block tracking-widest uppercase">
+                      <span className="font-label-sm text-[8px] md:text-xs text-primary mb-1 block tracking-widest uppercase">
                         {section.feature}
                       </span>
-                      <p className="font-display text-xl text-on-surface">
+                      <p className="font-display text-lg md:text-xl text-on-surface">
                         {section.label}
                       </p>
                     </div>
 
                     {section.stats && (
-                      <div className="flex gap-8 pt-4 border-t border-white/10">
+                      <div className="flex gap-4 md:gap-8 pt-3 md:pt-4 border-t border-white/10">
                         {section.stats.map((stat, i) => (
                           <div key={i}>
-                            <p className="font-display text-2xl text-primary mb-1">
+                            <p className="font-display text-lg md:text-2xl text-primary mb-0.5 md:mb-1">
                               {stat.value}
                             </p>
-                            <p className="font-label-sm text-on-surface/50 tracking-wider uppercase">
+                            <p className="font-label-sm text-[8px] md:text-[10px] text-on-surface/50 tracking-wider uppercase">
                               {stat.label}
                             </p>
                           </div>
@@ -252,13 +252,13 @@ export default function StudioTour() {
                     )}
                     
                     {section.icons && (
-                      <div className="flex gap-6 pt-4 border-t border-white/10">
+                      <div className="flex gap-3 md:gap-6 pt-3 md:pt-4 border-t border-white/10 flex-wrap">
                         {section.icons.map((icon, i) => (
-                          <div key={i} className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full border border-primary/20 flex items-center justify-center text-primary">
-                              <span className="material-symbols-outlined text-[16px]">{icon.name}</span>
+                          <div key={i} className="flex items-center gap-2 md:gap-3">
+                            <div className="w-6 h-6 md:w-8 md:h-8 rounded-full border border-primary/20 flex items-center justify-center text-primary">
+                              <span className="material-symbols-outlined text-[12px] md:text-[16px]">{icon.name}</span>
                             </div>
-                            <span className="font-label-sm text-on-surface/50 tracking-wider uppercase">
+                            <span className="font-label-sm text-[8px] md:text-[10px] text-on-surface/50 tracking-wider uppercase">
                               {icon.label}
                             </span>
                           </div>
