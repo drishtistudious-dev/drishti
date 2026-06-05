@@ -6,8 +6,7 @@ const nextConfig: NextConfig = {
     root: __dirname,
   },
   // Keep existing options (if any)
-}
-  /* config options here */
+  // config options here
 };
 
 export default nextConfig;
