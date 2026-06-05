@@ -42,7 +42,7 @@ export default function BookingsPage() {
   const filtered = filter === "All" ? bookings : bookings.filter(b => b.status === filter);
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-12 py-8 md:py-12">
       <div className="flex items-center justify-between mb-8 animate-fade-in">
         <div>
           <p className="text-xs text-[#f2ca50] tracking-widest uppercase mb-1">My Sessions</p>

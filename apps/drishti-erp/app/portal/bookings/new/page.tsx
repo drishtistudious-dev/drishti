@@ -102,7 +102,7 @@ export default function NewBookingPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto px-4 sm:px-8 md:px-12 py-8 md:py-12">
       {/* Header */}
       <div className="mb-8 animate-fade-in">
         <Link href="/portal/bookings" className="inline-flex items-center gap-2 text-[#5a5248] hover:text-[#f2ca50] text-xs tracking-wider uppercase mb-4 transition-colors">

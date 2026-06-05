@@ -40,7 +40,7 @@ export default function ProfilePage() {
   if (!user) return null;
 
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="max-w-5xl mx-auto px-4 sm:px-8 md:px-12 py-8 md:py-12">
       <div className="mb-8 animate-fade-in">
         <p className="text-xs text-[#f2ca50] tracking-widest uppercase mb-1">Account</p>
         <h1 className="font-display text-4xl text-[#e5e2e1] font-bold">My Profile</h1>
