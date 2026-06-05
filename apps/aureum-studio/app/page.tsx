@@ -237,10 +237,7 @@ export default function Home() {
               BOOK NOW
             </a>
             
-            {/* Mobile Hamburger Menu Icon */}
-            <button className="md:hidden text-primary p-1">
-              <Menu size={24} strokeWidth={1.5} />
-            </button>
+
           </div>
         </div>
       </nav>
