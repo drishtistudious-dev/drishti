@@ -5,8 +5,8 @@
     "dev": "pnpm -r dev",
     "build": "pnpm -r build",
     "lint": "pnpm -r lint",
-    "format": "pnpm -r format",
-    "postinstall": "npx prisma generate --schema=./prisma/schema.prisma"
+    "format": "pnpm -r format"
+
   },
   "dependencies": {
     "next": "^13.5.9",
