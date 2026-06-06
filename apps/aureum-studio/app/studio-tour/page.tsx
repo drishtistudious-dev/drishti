@@ -193,7 +193,7 @@ export default function StudioTour() {
               }}
             >
               <div 
-                className="w-full h-[85vh] bg-surface rounded-[2rem] border border-white/10 shadow-[0_-20px_50px_rgba(0,0,0,0.6)] overflow-hidden flex flex-col md:flex-row relative"
+                className="w-full h-[78vh] md:h-[85vh] mt-20 md:mt-0 bg-surface rounded-[2rem] border border-white/10 shadow-[0_-20px_50px_rgba(0,0,0,0.6)] overflow-hidden flex flex-col md:flex-row relative"
               >
                 {/* Background glow or subtle texture */}
                 <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/30 via-background to-background pointer-events-none" />
