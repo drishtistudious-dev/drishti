@@ -129,9 +129,9 @@ export default function ProfilePage() {
             <Mail size={14} className="text-[#f2ca50]" />
             drishtistudious@gmail.com
           </a>
-          <a href="tel:8460549557" className="flex items-center gap-3 text-sm text-[#8a8278] hover:text-[#f2ca50] transition-colors">
+          <a href="tel:9187653561" className="flex items-center gap-3 text-sm text-[#8a8278] hover:text-[#f2ca50] transition-colors">
             <Phone size={14} className="text-[#f2ca50]" />
-            +91 84605 49557
+            +91 91876 53561
           </a>
         </div>
       </div>

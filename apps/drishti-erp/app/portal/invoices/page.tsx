@@ -80,7 +80,7 @@ export default function InvoicesPage() {
         </div>
         <div class="footer">
           <p>Thank you for choosing Drishti Studios.</p>
-          <p>drishtistudious@gmail.com · +91 84605 49557</p>
+          <p>drishtistudious@gmail.com · +91 91876 53561</p>
           <p>Generated on ${format(new Date(), "MMM d, yyyy")}</p>
         </div>
       </body>

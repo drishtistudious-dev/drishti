@@ -848,8 +848,8 @@ export default function Home() {
               </div>
               <div className="flex flex-col gap-1 pt-1">
                 <span className="font-sans text-[10px] text-[#666] tracking-widest uppercase">PHONE</span>
-                <a href="tel:8460549557" className="font-display text-[16px] text-[#d4af37] leading-snug">
-                  +91 84605 49557
+                <a href="tel:9187653561" className="font-display text-[16px] text-[#d4af37] leading-snug">
+                  +91 91876 53561
                 </a>
               </div>
             </div>
@@ -954,10 +954,10 @@ export default function Home() {
             <p className="font-sans text-body-md text-on-surface-variant/80">
               Phone:{" "}
               <a
-                href="tel:8460549557"
+                href="tel:9187653561"
                 className="text-primary hover:underline hover:text-primary-fixed transition-colors"
               >
-                +91 84605 49557
+                +91 91876 53561
               </a>
             </p>
           </div>
