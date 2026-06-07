@@ -24,6 +24,14 @@ export async function POST(req: NextRequest) {
       data: { name, email, phone: phone || null, password: hashedPassword },
     });
 
+    // Ensure the user also appears in the Client section (Customer table)
+    const existingCustomer = await prisma.customer.findFirst({ where: { email } });
+    if (!existingCustomer) {
+      await prisma.customer.create({
+        data: { name, email, phone: phone || null },
+      });
+    }
+
     return NextResponse.json({
       user: { id: user.id, name: user.name, email: user.email, phone: user.phone },
     });

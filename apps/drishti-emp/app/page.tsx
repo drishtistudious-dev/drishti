@@ -51,73 +51,73 @@ export default async function EmployeeDashboard() {
   });
 
   return (
-    <div className="p-4 sm:p-6 lg:p-10 2xl:p-16 animate-fade-in relative z-10 h-full max-w-[120rem] mx-auto">
+    <div className="p-4 sm:p-6 lg:p-10 2xl:p-16 animate-fade-in relative z-10 h-full max-w-[120rem] mx-auto text-[#e5e2e1]">
       <div className="mb-8 sm:mb-12 2xl:mb-16">
-        <h1 className="text-3xl sm:text-4xl 2xl:text-6xl font-display text-[#1a1a1a] mb-3 tracking-tight">Let's create some magic today, {employee.name}!</h1>
+        <h1 className="text-3xl sm:text-4xl 2xl:text-6xl font-display text-white mb-3 tracking-tight">Let's create some magic today, {employee.name}!</h1>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-6 sm:gap-8 2xl:gap-12">
         
         {/* Next Schedule Bento */}
-        <div className="lg:col-span-2 2xl:col-span-3 rounded-2xl sm:rounded-[2rem] bg-white border border-[#e5e0d8] p-5 sm:p-8 2xl:p-12 shadow-sm relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#d4af37]/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+        <div className="lg:col-span-2 2xl:col-span-3 rounded-2xl sm:rounded-[2rem] bg-[#0d0d0d] border border-white/5 p-5 sm:p-8 2xl:p-12 shadow-sm relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#f2ca50]/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
           
           <div className="flex items-center justify-between mb-6 sm:mb-8 2xl:mb-10 relative z-10">
-            <h2 className="text-lg sm:text-xl 2xl:text-3xl font-display text-[#1a1a1a] tracking-wide">Next Schedule</h2>
-            <div className="w-8 h-[1px] bg-[#d4af37]/50"></div>
+            <h2 className="text-lg sm:text-xl 2xl:text-3xl font-display text-white tracking-wide">Next Schedule</h2>
+            <div className="w-8 h-[1px] bg-[#f2ca50]/50"></div>
           </div>
           
           {nextShoot ? (
             <div className="relative z-10">
-              <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 sm:gap-6 2xl:gap-8 p-4 sm:p-6 2xl:p-8 rounded-2xl bg-[#faf9f6] border border-[#e5e0d8]">
+              <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 sm:gap-6 2xl:gap-8 p-4 sm:p-6 2xl:p-8 rounded-2xl bg-[#111] border border-white/5">
                 <div className="flex-1">
-                  <span className="text-[10px] 2xl:text-xs font-bold tracking-[0.2em] uppercase text-[#d4af37] block mb-2">{nextShoot.role}</span>
-                  <p className="text-xl sm:text-2xl 2xl:text-4xl font-display text-[#1a1a1a] mb-1">{nextShoot.booking.type}</p>
-                  <p className="text-xs sm:text-sm 2xl:text-lg text-[#5c5955] mb-4">Client: <span className="text-[#1a1a1a] font-medium">{nextShoot.booking.customer.name}</span></p>
+                  <span className="text-[10px] 2xl:text-xs font-bold tracking-[0.2em] uppercase text-[#f2ca50] block mb-2">{nextShoot.role}</span>
+                  <p className="text-xl sm:text-2xl 2xl:text-4xl font-display text-white mb-1">{nextShoot.booking.type}</p>
+                  <p className="text-xs sm:text-sm 2xl:text-lg text-[#a39a8c] mb-4">Client: <span className="text-white font-medium">{nextShoot.booking.customer.name}</span></p>
                   
                   <div className="flex flex-col gap-2">
                     <p className="text-[10px] font-bold text-[#8a8278] uppercase tracking-widest mb-1">Your Team For This Shoot</p>
                     {nextShoot.booking.assignments.map((crew: any) => (
-                      <div key={crew.id} className="text-sm flex items-center justify-between bg-white px-3 py-2 rounded-lg border border-[#e5e0d8] shadow-sm">
-                        <span className="text-[#2d2a26] font-medium">{crew.staff.name} {crew.staff.id === employee.id ? <span className="text-xs text-[#8a8278] ml-1 font-normal">(You)</span> : ""}</span>
-                        <span className="text-xs text-[#d4af37] font-semibold">{crew.role}</span>
+                      <div key={crew.id} className="text-sm flex items-center justify-between bg-[#0a0a0a] px-3 py-2 rounded-lg border border-white/5 shadow-sm">
+                        <span className="text-[#e5e2e1] font-medium">{crew.staff.name} {crew.staff.id === employee.id ? <span className="text-xs text-[#8a8278] ml-1 font-normal">(You)</span> : ""}</span>
+                        <span className="text-xs text-[#f2ca50] font-semibold">{crew.role}</span>
                       </div>
                     ))}
                   </div>
                 </div>
                 <div className="text-left md:text-right shrink-0">
-                  <p className="text-2xl sm:text-3xl 2xl:text-5xl font-display text-[#1a1a1a] font-light">{format(nextShoot.booking.startDate, "MMM d, yyyy")}</p>
-                  <p className="text-xs sm:text-sm 2xl:text-lg text-[#5c5955] mt-1">{format(nextShoot.booking.startDate, "h:mm a")}</p>
+                  <p className="text-2xl sm:text-3xl 2xl:text-5xl font-display text-white font-light">{format(nextShoot.booking.startDate, "MMM d, yyyy")}</p>
+                  <p className="text-xs sm:text-sm 2xl:text-lg text-[#a39a8c] mt-1">{format(nextShoot.booking.startDate, "h:mm a")}</p>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="p-12 text-center relative z-10 bg-[#faf9f6] rounded-2xl border border-[#e5e0d8] border-dashed">
+            <div className="p-12 text-center relative z-10 bg-[#111] rounded-2xl border border-white/5 border-dashed">
               <p className="text-[#8a8278]">No upcoming shoots assigned.</p>
             </div>
           )}
         </div>
 
         {/* Announcements Bento */}
-        <div className="lg:col-span-1 rounded-2xl sm:rounded-[2rem] bg-white border border-[#e5e0d8] p-5 sm:p-8 2xl:p-12 shadow-sm">
+        <div className="lg:col-span-1 rounded-2xl sm:rounded-[2rem] bg-[#0d0d0d] border border-white/5 p-5 sm:p-8 2xl:p-12 shadow-sm">
           <div className="flex items-center justify-between mb-6 2xl:mb-8">
-            <h2 className="text-lg sm:text-xl 2xl:text-3xl font-display text-[#1a1a1a] tracking-wide">Updates</h2>
-            <div className="w-8 h-[1px] bg-[#e5e0d8]"></div>
+            <h2 className="text-lg sm:text-xl 2xl:text-3xl font-display text-white tracking-wide">Updates</h2>
+            <div className="w-8 h-[1px] bg-white/10"></div>
           </div>
           
           <div className="flex flex-col gap-4">
             {announcements.map(ann => (
-              <div key={ann.id} className="p-5 rounded-2xl bg-[#faf9f6] border border-[#e5e0d8] hover:border-[#d4af37]/30 transition-colors">
-                <h3 className="text-sm font-semibold text-[#1a1a1a] mb-1">{ann.title}</h3>
-                <p className="text-xs text-[#5c5955] mb-3 line-clamp-2 leading-relaxed">{ann.content}</p>
+              <div key={ann.id} className="p-5 rounded-2xl bg-[#111] border border-white/5 hover:border-[#f2ca50]/30 transition-colors">
+                <h3 className="text-sm font-semibold text-white mb-1">{ann.title}</h3>
+                <p className="text-xs text-[#a39a8c] mb-3 line-clamp-2 leading-relaxed">{ann.content}</p>
                 <div className="flex justify-between items-center text-[9px] text-[#8a8278] uppercase tracking-wider font-semibold">
                   <span>{ann.author.name}</span>
-                  <span className="text-[#d4af37]">{format(ann.createdAt, "MMM d")}</span>
+                  <span className="text-[#f2ca50]">{format(ann.createdAt, "MMM d")}</span>
                 </div>
               </div>
             ))}
             {announcements.length === 0 && (
-              <p className="text-sm text-[#8a8278] text-center py-8 bg-[#faf9f6] rounded-2xl border border-[#e5e0d8] border-dashed">No recent updates.</p>
+              <p className="text-sm text-[#8a8278] text-center py-8 bg-[#111] rounded-2xl border border-white/5 border-dashed">No recent updates.</p>
             )}
           </div>
         </div>

@@ -45,40 +45,40 @@ export default async function SchedulePage() {
   return (
     <div className="p-10 animate-fade-in relative z-10 h-full overflow-y-auto">
       <div className="mb-10">
-        <h1 className="text-3xl font-display text-[#1a1a1a] mb-2">My Schedule</h1>
-        <p className="text-[#5c5955] text-sm">View your upcoming and past shoots.</p>
+        <h1 className="text-3xl font-display text-white mb-2">My Schedule</h1>
+        <p className="text-[#a39a8c] text-sm">View your upcoming and past shoots.</p>
       </div>
 
       <div className="space-y-8">
         <section>
-          <h2 className="text-xl font-display text-[#d4af37] mb-4 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#d4af37] animate-pulse"></span>
+          <h2 className="text-xl font-display text-[#f2ca50] mb-4 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#f2ca50] animate-pulse"></span>
             Upcoming Shoots
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {upcoming.length === 0 && (
-              <p className="text-[#8a8278] text-sm p-6 border border-[#e5e0d8] border-dashed rounded-2xl bg-[#faf9f6] text-center">No upcoming shoots assigned.</p>
+              <p className="text-[#8a8278] text-sm p-6 border border-white/5 border-dashed rounded-2xl bg-[#111] text-center">No upcoming shoots assigned.</p>
             )}
             {upcoming.map(a => (
-              <div key={a.id} className="bg-white border border-[#e5e0d8] rounded-2xl p-6 shadow-sm hover:border-[#d4af37]/50 hover:shadow-md transition-all group">
+              <div key={a.id} className="bg-[#0d0d0d] border border-white/5 rounded-2xl p-6 shadow-sm hover:border-[#f2ca50]/50 hover:shadow-md transition-all group">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#d4af37] block mb-1">{a.role}</span>
-                    <h3 className="text-lg font-display text-[#1a1a1a]">{a.booking.type}</h3>
+                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#f2ca50] block mb-1">{a.role}</span>
+                    <h3 className="text-lg font-display text-white">{a.booking.type}</h3>
                   </div>
                   <div className="text-right">
-                    <p className="text-[#1a1a1a] font-medium">{format(a.booking.startDate, "MMM d, yyyy")}</p>
+                    <p className="text-white font-medium">{format(a.booking.startDate, "MMM d, yyyy")}</p>
                     <p className="text-[#8a8278] text-sm">{format(a.booking.startDate, "h:mm a")}</p>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-[#f4f2ee]">
-                  <p className="text-sm text-[#5c5955]">Client: <span className="text-[#1a1a1a] font-medium">{a.booking.customer.name}</span></p>
+                <div className="pt-4 border-t border-white/5">
+                  <p className="text-sm text-[#a39a8c]">Client: <span className="text-white font-medium">{a.booking.customer.name}</span></p>
                   <div className="mt-4 flex flex-col gap-2">
                     <p className="text-[10px] font-bold text-[#8a8278] uppercase tracking-widest mb-1">Crew List</p>
                     {a.booking.assignments.map((crew: any) => (
-                      <div key={crew.id} className="text-sm flex items-center justify-between bg-[#faf9f6] px-3 py-2 rounded-lg border border-[#e5e0d8]">
-                        <span className="text-[#2d2a26] font-medium">{crew.staff.name} {crew.staff.id === employee.id ? <span className="text-xs text-[#8a8278] ml-1 font-normal">(You)</span> : ""}</span>
-                        <span className="text-xs text-[#d4af37] font-semibold">{crew.role}</span>
+                      <div key={crew.id} className="text-sm flex items-center justify-between bg-[#111] px-3 py-2 rounded-lg border border-white/5">
+                        <span className="text-[#e5e2e1] font-medium">{crew.staff.name} {crew.staff.id === employee.id ? <span className="text-xs text-[#8a8278] ml-1 font-normal">(You)</span> : ""}</span>
+                        <span className="text-xs text-[#f2ca50] font-semibold">{crew.role}</span>
                       </div>
                     ))}
                   </div>
@@ -89,18 +89,18 @@ export default async function SchedulePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-display text-[#1a1a1a] mb-4 opacity-70 mt-12">Past Shoots</h2>
+          <h2 className="text-xl font-display text-white mb-4 opacity-70 mt-12">Past Shoots</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 opacity-70">
             {past.length === 0 && (
               <p className="text-[#8a8278] text-sm p-6">No past shoots.</p>
             )}
             {past.map(a => (
-              <div key={a.id} className="bg-[#faf9f6] border border-[#e5e0d8] rounded-2xl p-6 grayscale hover:grayscale-0 transition-all">
+              <div key={a.id} className="bg-[#111] border border-white/5 rounded-2xl p-6 grayscale hover:grayscale-0 transition-all">
                 <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-[#1a1a1a] font-medium">{a.booking.type}</h3>
+                  <h3 className="text-white font-medium">{a.booking.type}</h3>
                   <p className="text-[#8a8278] text-sm font-medium">{format(a.booking.startDate, "MMM d, yyyy")}</p>
                 </div>
-                <p className="text-sm text-[#5c5955]">Role: <span className="font-semibold text-[#8a8278]">{a.role}</span></p>
+                <p className="text-sm text-[#a39a8c]">Role: <span className="font-semibold text-[#8a8278]">{a.role}</span></p>
               </div>
             ))}
           </div>
