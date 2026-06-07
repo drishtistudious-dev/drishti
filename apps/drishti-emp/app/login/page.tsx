@@ -15,6 +15,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
+  const [countdown, setCountdown] = useState(0);
 
   useEffect(() => {
     // Initialize reCAPTCHA on component mount
@@ -33,6 +34,14 @@ export default function LoginPage() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (countdown > 0) {
+      timer = setTimeout(() => setCountdown(countdown - 1), 1000);
+    }
+    return () => clearTimeout(timer);
+  }, [countdown]);
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,6 +74,7 @@ export default function LoginPage() {
       
       setConfirmationResult(result);
       setStep(2);
+      setCountdown(30);
     } catch (err: any) {
       console.error(err);
       setError(err.message || "Failed to send OTP. Try again.");
@@ -73,6 +83,26 @@ export default function LoginPage() {
         window.recaptchaVerifier.render().then((widgetId: any) => {
           window.recaptchaVerifier.reset(widgetId);
         }).catch(() => {});
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResendOtp = async () => {
+    if (countdown > 0) return;
+    setLoading(true);
+    setError("");
+    try {
+      const appVerifier = window.recaptchaVerifier;
+      const result = await signInWithPhoneNumber(auth, phone, appVerifier);
+      setConfirmationResult(result);
+      setCountdown(30);
+    } catch (err: any) {
+      console.error(err);
+      setError("Failed to resend OTP. Please try again.");
+      if (window.recaptchaVerifier) {
+        window.recaptchaVerifier.render().then((wId: any) => window.recaptchaVerifier.reset(wId)).catch(()=>{});
       }
     } finally {
       setLoading(false);
@@ -179,13 +209,24 @@ export default function LoginPage() {
           <form onSubmit={handleVerifyOtp} className="space-y-6 animate-fade-in">
             <div className="text-center mb-6">
               <p className="text-sm text-[#8a8278]">Code sent to <span className="text-white">{phone}</span></p>
-              <button 
-                type="button" 
-                onClick={() => setStep(1)}
-                className="text-xs text-[#f2ca50] hover:underline mt-2"
-              >
-                Change number
-              </button>
+              <div className="flex items-center justify-center gap-4 mt-3">
+                <button 
+                  type="button" 
+                  onClick={() => { setStep(1); setOtp(""); }}
+                  className="text-xs text-[#8a8278] hover:text-white transition-colors"
+                >
+                  Change number
+                </button>
+                <span className="text-[#333]">•</span>
+                <button 
+                  type="button" 
+                  onClick={handleResendOtp}
+                  disabled={countdown > 0 || loading}
+                  className="text-xs text-[#f2ca50] hover:underline disabled:opacity-50 disabled:no-underline disabled:text-[#8a8278] transition-colors"
+                >
+                  {countdown > 0 ? `Resend OTP in ${countdown}s` : "Resend OTP"}
+                </button>
+              </div>
             </div>
             
             <div>
