@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, phone, role } = await req.json();
+    const { name, email, phone, role, password } = await req.json();
 
     if (!name || !phone) {
       return NextResponse.json({ error: "Name and phone are required" }, { status: 400 });
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
         phone: formattedPhone,
         role: role || "Staff",
         designation: "Crew",
-        password: "otp_only_account", // Used for Crew Portal OTP flow
+        password: password || "otp_only_account", // Used for Crew Portal Email flow
       },
     });
 

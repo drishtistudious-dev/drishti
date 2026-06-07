@@ -10,7 +10,8 @@ import {
   LayoutDashboard, 
   CalendarCheck, 
   ClipboardList, 
-  LogOut
+  LogOut,
+  Settings
 } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -83,6 +84,7 @@ export default function RootLayout({
               { href: "/", label: "Dashboard", icon: LayoutDashboard },
               { href: "/schedule", label: "My Schedule", icon: CalendarCheck },
               { href: "/announcements", label: "Updates", icon: ClipboardList },
+              { href: "/settings", label: "Settings", icon: Settings },
             ].map((link) => (
               <Link key={link.href} href={link.href} className="group relative flex items-center gap-4 px-4 py-3.5 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#f2ca50]/10 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out"></div>

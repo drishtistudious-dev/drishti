@@ -9,7 +9,7 @@ export default function AddStaffModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [form, setForm] = useState({ name: "", email: "", phone: "", role: "Crew" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", role: "Crew", password: "" });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ export default function AddStaffModal() {
         setError(data.error || "Something went wrong");
       } else {
         setIsOpen(false);
-        setForm({ name: "", email: "", phone: "", role: "Crew" });
+        setForm({ name: "", email: "", phone: "", role: "Crew", password: "" });
         router.refresh();
       }
     } catch (err) {
@@ -99,6 +99,18 @@ export default function AddStaffModal() {
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#f2ca50]"
                   placeholder="john@drishtistudios.in"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[10px] font-bold tracking-widest uppercase text-[#8a8278] mb-1.5">Password (For Email Login)</label>
+                <input 
+                  type="text" 
+                  value={form.password}
+                  onChange={(e) => setForm({ ...form, password: e.target.value })}
+                  className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#f2ca50]"
+                  placeholder="Enter a secure password"
+                  required
                 />
               </div>
 

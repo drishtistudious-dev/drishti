@@ -17,6 +17,11 @@ export default function LoginPage() {
   const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
   const [countdown, setCountdown] = useState(0);
 
+  // Password Login State
+  const [loginMode, setLoginMode] = useState<"otp" | "password">("otp");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   useEffect(() => {
     // Initialize reCAPTCHA on component mount
     if (!window.recaptchaVerifier) {
@@ -147,6 +152,33 @@ export default function LoginPage() {
     }
   };
 
+  const handlePasswordLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/auth/password-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Login Failed");
+      }
+
+      router.push("/");
+      router.refresh();
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || "Invalid email or password.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#030303] flex items-center justify-center relative overflow-hidden">
       {/* Background effects */}
@@ -171,6 +203,21 @@ export default function LoginPage() {
           <p className="text-[#8a8278] text-sm">Sign in to view your schedule and updates</p>
         </div>
 
+        <div className="flex bg-white/5 p-1 rounded-xl mb-8">
+          <button
+            className={`flex-1 py-2 text-sm font-medium rounded-lg transition-colors ${loginMode === 'otp' ? 'bg-[#f2ca50] text-black' : 'text-[#8a8278] hover:text-white'}`}
+            onClick={() => setLoginMode('otp')}
+          >
+            OTP Login
+          </button>
+          <button
+            className={`flex-1 py-2 text-sm font-medium rounded-lg transition-colors ${loginMode === 'password' ? 'bg-[#f2ca50] text-black' : 'text-[#8a8278] hover:text-white'}`}
+            onClick={() => setLoginMode('password')}
+          >
+            Password Login
+          </button>
+        </div>
+
         {error && (
           <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start gap-3">
             <ShieldAlert size={18} className="text-red-400 shrink-0 mt-0.5" />
@@ -178,7 +225,8 @@ export default function LoginPage() {
           </div>
         )}
 
-        {step === 1 ? (
+        {loginMode === 'otp' ? (
+          step === 1 ? (
           <form onSubmit={handleSendOtp} className="space-y-6">
             <div>
               <label className="block text-xs font-bold tracking-widest uppercase text-[#8a8278] mb-2">Mobile Number</label>
@@ -248,6 +296,47 @@ export default function LoginPage() {
               className="w-full bg-[#f2ca50] text-black font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 hover:bg-[#e6be4b] transition-colors disabled:opacity-50"
             >
               {loading ? <Loader2 size={18} className="animate-spin" /> : "Verify & Log In"}
+            </button>
+          </form>
+          )
+        ) : (
+          <form onSubmit={handlePasswordLogin} className="space-y-6 animate-fade-in">
+            <div>
+              <label className="block text-xs font-bold tracking-widest uppercase text-[#8a8278] mb-2">Email Address</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="crew@drishtistudios.com"
+                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-[#f2ca50] transition-colors"
+                disabled={loading}
+                required
+              />
+            </div>
+            
+            <div>
+              <label className="block text-xs font-bold tracking-widest uppercase text-[#8a8278] mb-2">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-[#f2ca50] transition-colors"
+                disabled={loading}
+                required
+              />
+            </div>
+            
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#f2ca50] text-black font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 hover:bg-[#e6be4b] transition-colors disabled:opacity-50"
+            >
+              {loading ? <Loader2 size={18} className="animate-spin" /> : (
+                <>
+                  Log In <ArrowRight size={18} />
+                </>
+              )}
             </button>
           </form>
         )}

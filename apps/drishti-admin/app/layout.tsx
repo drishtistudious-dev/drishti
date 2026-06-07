@@ -13,7 +13,8 @@ import {
   ClipboardList, 
   LogOut,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Settings
 } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -89,6 +90,7 @@ export default function RootLayout({
               { href: "/bookings", label: "Bookings", icon: CalendarCheck },
               { href: "/leads", label: "Leads", icon: ClipboardList },
               { href: "/clients", label: "Clients & Staff", icon: Users },
+              { href: "/settings", label: "Settings", icon: Settings },
             ].map((link) => (
               <Link key={link.href} href={link.href} className="group relative flex items-center gap-4 px-4 py-3.5 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5">
                 {/* Hoverboard background sweep effect */}
