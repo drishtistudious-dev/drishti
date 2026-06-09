@@ -17,15 +17,8 @@ interface UserData {
   name: string;
   email: string;
   phone?: string;
+  role?: string;
 }
-
-const navLinks = [
-  { href: "/portal", label: "DASHBOARD", icon: LayoutDashboard },
-  { href: "/portal/bookings", label: "BOOKINGS", icon: CalendarDays },
-  { href: "/portal/bookings/new", label: "PROJECTS", icon: FolderKanban },
-  { href: "/portal/invoices", label: "INVOICES", icon: FileText },
-  { href: "/portal/profile", label: "SETTINGS", icon: Settings },
-];
 
 export default function PortalLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -41,6 +34,31 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
     }
     setUser(JSON.parse(stored));
   }, [router]);
+
+  const navLinks = (() => {
+    if (user?.role === "Admin") {
+      return [
+        { href: "/portal", label: "DASHBOARD", icon: LayoutDashboard },
+        { href: "/portal/bookings", label: "ALL BOOKINGS", icon: CalendarDays },
+        { href: "/portal/staff", label: "STAFF/CREW", icon: Settings },
+        { href: "/portal/profile", label: "SETTINGS", icon: Settings },
+      ];
+    }
+    if (user?.role === "Crew") {
+      return [
+        { href: "/portal", label: "DASHBOARD", icon: LayoutDashboard },
+        { href: "/portal/bookings", label: "MY SCHEDULE", icon: CalendarDays },
+        { href: "/portal/profile", label: "SETTINGS", icon: Settings },
+      ];
+    }
+    return [
+      { href: "/portal", label: "DASHBOARD", icon: LayoutDashboard },
+      { href: "/portal/bookings", label: "BOOKINGS", icon: CalendarDays },
+      { href: "/portal/bookings/new", label: "PROJECTS", icon: FolderKanban },
+      { href: "/portal/invoices", label: "INVOICES", icon: FileText },
+      { href: "/portal/profile", label: "SETTINGS", icon: Settings },
+    ];
+  })();
 
   const handleLogout = () => {
     localStorage.removeItem("erp_user");
@@ -108,7 +126,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             </div>
             <div className="min-w-0 flex-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap overflow-hidden">
               <p className="text-xs font-semibold text-[#e5e2e1] truncate leading-tight">{user.name}</p>
-              <p className="text-[10px] text-[#4a4238] truncate leading-tight">{user.email}</p>
+              <p className="text-[10px] text-[#f2ca50] tracking-wider font-bold truncate leading-tight uppercase">{user.role || "Client"}</p>
             </div>
           </div>
           <button
@@ -156,7 +174,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-xs font-semibold text-[#e5e2e1] truncate">{user.name}</p>
-                  <p className="text-[10px] text-[#4a4238] truncate">{user.email}</p>
+                  <p className="text-[10px] text-[#f2ca50] tracking-wider font-bold truncate uppercase">{user.role || "Client"}</p>
                 </div>
               </div>
               <button onClick={handleLogout}

@@ -5,6 +5,49 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const email = searchParams.get("email");
+    const blocked = searchParams.get("blocked");
+    const all = searchParams.get("all");
+    const staffEmail = searchParams.get("staffEmail");
+
+    if (blocked === "true") {
+      const bookings = await prisma.booking.findMany({
+        where: {
+          status: {
+            in: ["Confirmed", "Completed"]
+          }
+        },
+        orderBy: { startDate: "asc" }
+      });
+      return NextResponse.json({ bookings });
+    }
+
+    if (all === "true") {
+      const bookings = await prisma.booking.findMany({
+        include: { customer: true },
+        orderBy: { startDate: "desc" }
+      });
+      return NextResponse.json({ bookings });
+    }
+
+    if (staffEmail) {
+      const staff = await prisma.staff.findFirst({
+        where: { email: staffEmail }
+      });
+      if (!staff) return NextResponse.json({ bookings: [] });
+
+      const assignments = await prisma.assignment.findMany({
+        where: { staffId: staff.id },
+        include: {
+          booking: {
+            include: { customer: true }
+          }
+        },
+        orderBy: { booking: { startDate: "desc" } }
+      });
+      const bookings = assignments.map(a => a.booking);
+      return NextResponse.json({ bookings });
+    }
+
     if (!email) return NextResponse.json({ error: "Email required" }, { status: 400 });
 
     // Find customer by email via UserAccount

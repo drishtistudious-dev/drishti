@@ -11,7 +11,7 @@ async function main() {
       email: 'admin2@drishtistudios.com',
       phone: '+918792019057',
       role: 'Admin',
-      password: 'defaultpassword123', // Not used for OTP
+      password: 'Drishti@1234', // Not used for OTP
     },
   })
   console.log('Added Admin Account:', admin)

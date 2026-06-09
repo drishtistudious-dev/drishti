@@ -12,6 +12,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Password must be at least 6 characters" }, { status: 400 });
     }
 
+    if (email.toLowerCase().trim() === "drishtistudios@gmail.com") {
+      return NextResponse.json({ error: "This email address is reserved for administrative use." }, { status: 403 });
+    }
+
     const existing = await prisma.userAccount.findUnique({ where: { email } });
     if (existing) {
       return NextResponse.json({ error: "An account with this email already exists" }, { status: 409 });

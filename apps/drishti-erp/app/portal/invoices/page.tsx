@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Camera, FileText, Download, Clock, CheckCircle, AlertCircle } from "lucide-react";
 import { format } from "date-fns";
+import Link from "next/link";
 
 interface Booking {
   id: string;
@@ -21,14 +22,22 @@ const STATUS_CONFIG: Record<string, { label: string; class: string; icon: React.
 };
 
 export default function InvoicesPage() {
+  const [user, setUser] = useState<any>(null);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const stored = localStorage.getItem("erp_user");
     if (!stored) return;
-    const user = JSON.parse(stored);
-    fetch(`/api/bookings?email=${encodeURIComponent(user.email)}`)
+    const currentUser = JSON.parse(stored);
+    setUser(currentUser);
+
+    if (currentUser.role === "Admin" || currentUser.role === "Crew") {
+      setLoading(false);
+      return;
+    }
+
+    fetch(`/api/bookings?email=${encodeURIComponent(currentUser.email)}`)
       .then(r => r.json())
       .then(d => setBookings(d.bookings || []))
       .finally(() => setLoading(false));
@@ -37,6 +46,21 @@ export default function InvoicesPage() {
   const invoiceBookings = bookings.filter(b => b.totalAmount > 0);
   const totalSpent = bookings.reduce((sum, b) => sum + b.advancePaid, 0);
   const totalDue = bookings.reduce((sum, b) => sum + (b.totalAmount - b.advancePaid), 0);
+
+  if (user && (user.role === "Admin" || user.role === "Crew")) {
+    return (
+      <div className="max-w-md mx-auto px-6 py-20 text-center flex flex-col items-center justify-center min-h-[60vh] animate-fade-in">
+        <AlertCircle size={48} className="text-[#ff5252] mb-4" />
+        <h2 className="text-xl font-display text-white mb-2">Access Restricted</h2>
+        <p className="text-sm text-[#5a5248] leading-relaxed mb-6">
+          Billing and invoice records are only accessible by Client portal members.
+        </p>
+        <Link href="/portal" className="btn-primary px-6 py-2.5 rounded-lg text-xs font-semibold uppercase tracking-wider">
+          Return to Dashboard
+        </Link>
+      </div>
+    );
+  }
 
   const handlePrint = (booking: Booking) => {
     const stored = localStorage.getItem("erp_user");
