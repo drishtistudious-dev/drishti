@@ -23,7 +23,7 @@ export default function ChatBot({ isOpen, onClose }: ChatBotProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
-    sendMessage({ role: 'user', parts: [{ type: 'text', text: input }] });
+    sendMessage({ role: 'user', content: input });
     setInput('');
   };
 
