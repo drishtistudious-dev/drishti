@@ -91,14 +91,7 @@ class OnboardingPage extends StatelessWidget {
                       Expanded(
                         child: Row(
                           children: [
-                            Image.network(
-                              'https://lh3.googleusercontent.com/aida-public/AB6AXuCSPYWTWsV5WuJlP-K9SKUrG7dQCVYz7CDG4mm6NnmYjrwlzKs78KfTwBmQ-Q0pUWasCrs2EQlKub1Rd8oLOt2IzRqq1DrwpnV25-Noz3pett8rhqNkyAa0ambXWfoIrGgwtt0O0p65GHZ7-Ut4gt2A_tsz2kixwUePxh5cw0nh-uBBCI90-rtFE9-Gw-QhhASixc5zJqQa2H7FxBoibK7YrGFT2vxotrLxMwPXlntEj4e2PlT-H9EZ6F3O-Zr35CzLvBNy2oerrQ',
-                              height: 40,
-                              fit: BoxFit.contain,
-                              errorBuilder: (context, error, stackTrace) {
-                                return const Icon(Icons.movie_creation_outlined, color: Color(0xFFF2CA50), size: 32);
-                              },
-                            ),
+                            Image.asset('assets/images/drishti_logo.png', height: 32, width: 32, fit: BoxFit.contain),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
@@ -137,15 +130,7 @@ class OnboardingPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Chips Row
-                      Row(
-                        children: [
-                          _buildChip('8K RAW'),
-                          const SizedBox(width: 8),
-                          _buildChip('CINEMATIC'),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
+                      // Chips Row removed
                       
                       // Heading
                       RichText(
@@ -247,38 +232,6 @@ class OnboardingPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 24),
-                      
-                      // Technical Status Row
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              const PulsingDot(),
-                              const SizedBox(width: 8),
-                              Text(
-                                'SYSTEM ONLINE',
-                                style: GoogleFonts.outfit(
-                                  fontSize: 10,
-                                  letterSpacing: 1.5,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white.withOpacity(0.6),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            'V.2.5.0 - LUX-NOIR',
-                            style: GoogleFonts.outfit(
-                              fontSize: 10,
-                              letterSpacing: 1.5,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white.withOpacity(0.4),
-                            ),
-                          ),
-                        ],
-                      ),
                       const SizedBox(height: 16),
                     ],
                   ),
@@ -355,43 +308,58 @@ class _ZoomingBackgroundState extends State<ZoomingBackground> with SingleTicker
           child: child,
         );
       },
-      child: Image.network(
-        'https://lh3.googleusercontent.com/aida/AP1WRLtHtWcoBXYeq1sC0K5KkhAzeTU1BlJkqTKo5FGGE_NfIvhxn5hpy_uWRwW_mohGDSCdfU243WB4EBJf753cr6_QCEagTlNURKuXMhLIlklHF4XYzWU56aqEeQsSjjEzLeL3LQLfhaFWo57gGNb5O4WsKcE4DQFIDLowVwJfR6g4t1nJl0f3e6JXKa_wuqkziqSvaNLFO71Zj3yxJloONqsapV-on_nFvsyd4r-2NlsC-O6MzIOq2Ttf',
-        fit: BoxFit.cover,
+      child: Container(
         width: double.infinity,
         height: double.infinity,
-        alignment: Alignment.center,
-        loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress == null) return child;
-          return Container(
-            color: const Color(0xFF0E0E0E),
-            child: const Center(
-              child: SizedBox(
-                width: 24,
-                height: 24,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFF2CA50)),
-                ),
-              ),
-            ),
-          );
-        },
-        errorBuilder: (context, error, stackTrace) {
-          return Container(
-            color: const Color(0xFF0E0E0E),
-            child: const Center(
-              child: Icon(
-                Icons.image_not_supported_outlined,
-                color: Colors.white24,
-                size: 48,
-              ),
-            ),
-          );
-        },
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF1D1B17),
+              Color(0xFF0E0E0E),
+              Color(0xFF13110E),
+              Color(0xFF070707),
+            ],
+            stops: [0.0, 0.4, 0.7, 1.0],
+          ),
+          image: DecorationImage(
+            image: AssetImage('assets/images/hero-bg.png'),
+            fit: BoxFit.cover,
+            opacity: 0.60,
+          ),
+        ),
+        child: Opacity(
+          opacity: 0.08,
+          child: CustomPaint(
+            painter: StudioGridPainter(),
+          ),
+        ),
       ),
     );
   }
+}
+
+class StudioGridPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = const Color(0xFFF2CA50)
+      ..strokeWidth = 1.0
+      ..style = PaintingStyle.stroke;
+
+    const int gridCount = 25;
+    final double cellWidth = size.width / gridCount;
+    final double cellHeight = size.height / gridCount;
+
+    for (int i = 0; i <= gridCount; i++) {
+      canvas.drawLine(Offset(i * cellWidth, 0), Offset(i * cellWidth, size.height), paint);
+      canvas.drawLine(Offset(0, i * cellHeight), Offset(size.width, i * cellHeight), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
 // Highly Optimized Pulsing Dot Widget
@@ -665,13 +633,20 @@ class _DashboardPageState extends State<DashboardPage> {
         backgroundColor: const Color(0xFF131313).withOpacity(0.8),
         elevation: 0,
         automaticallyImplyLeading: false,
-        title: Image.network(
-          'https://lh3.googleusercontent.com/aida-public/AB6AXuCSPYWTWsV5WuJlP-K9SKUrG7dQCVYz7CDG4mm6NnmYjrwlzKs78KfTwBmQ-Q0pUWasCrs2EQlKub1Rd8oLOt2IzRqq1DrwpnV25-Noz3pett8rhqNkyAa0ambXWfoIrGgwtt0O0p65GHZ7-Ut4gt2A_tsz2kixwUePxh5cw0nh-uBBCI90-rtFE9-Gw-QhhASixc5zJqQa2H7FxBoibK7YrGFT2vxotrLxMwPXlntEj4e2PlT-H9EZ6F3O-Zr35CzLvBNy2oerrQ',
-          height: 24,
-          fit: BoxFit.contain,
-          errorBuilder: (context, error, stackTrace) {
-            return const Icon(Icons.movie_creation_outlined, color: Color(0xFFF2CA50), size: 24);
-          },
+        title: Row(
+          children: [
+            Image.asset('assets/images/drishti_logo.png', height: 24, width: 24, fit: BoxFit.contain),
+            const SizedBox(width: 8),
+            Text(
+              'DRISHTI STUDIO',
+              style: GoogleFonts.outfit(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.5,
+                color: const Color(0xFFF2CA50),
+              ),
+            ),
+          ],
         ),
         actions: [
           IconButton(
@@ -680,6 +655,7 @@ class _DashboardPageState extends State<DashboardPage> {
               final prefs = await SharedPreferences.getInstance();
               final String? userEmail = prefs.getString('user_email');
               final String? userName = prefs.getString('user_name');
+              final String userRole = prefs.getString('user_role') ?? 'Client';
               
               if (!mounted) return;
               
@@ -689,6 +665,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     pageBuilder: (context, animation, secondaryAnimation) => ClientPortalPage(
                       email: userEmail,
                       name: userName,
+                      role: userRole,
                     ),
                     transitionsBuilder: (context, animation, secondaryAnimation, child) {
                       return FadeTransition(opacity: animation, child: child);
@@ -2944,10 +2921,12 @@ class _ClientLoginPageState extends State<ClientLoginPage> {
 
       if (response.statusCode == 200 && data['user'] != null) {
         final user = data['user'];
+        final String role = user['role'] ?? 'Client';
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('user_email', user['email'] ?? '');
         await prefs.setString('user_name', user['name'] ?? '');
         await prefs.setString('user_id', user['id'] ?? '');
+        await prefs.setString('user_role', role);
 
         if (!mounted) return;
         
@@ -2956,6 +2935,7 @@ class _ClientLoginPageState extends State<ClientLoginPage> {
             pageBuilder: (context, animation, secondaryAnimation) => ClientPortalPage(
               email: user['email'] ?? '',
               name: user['name'] ?? '',
+              role: role,
             ),
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
               return FadeTransition(opacity: animation, child: child);
@@ -3029,8 +3009,8 @@ class _ClientLoginPageState extends State<ClientLoginPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Center(
-                  child: Image.network(
-                    'https://lh3.googleusercontent.com/aida-public/AB6AXuCSPYWTWsV5WuJlP-K9SKUrG7dQCVYz7CDG4mm6NnmYjrwlzKs78KfTwBmQ-Q0pUWasCrs2EQlKub1Rd8oLOt2IzRqq1DrwpnV25-Noz3pett8rhqNkyAa0ambXWfoIrGgwtt0O0p65GHZ7-Ut4gt2A_tsz2kixwUePxh5cw0nh-uBBCI90-rtFE9-Gw-QhhASixc5zJqQa2H7FxBoibK7YrGFT2vxotrLxMwPXlntEj4e2PlT-H9EZ6F3O-Zr35CzLvBNy2oerrQ',
+                  child: Image.asset(
+                    'assets/images/drishti_logo.png',
                     height: 64,
                     fit: BoxFit.contain,
                   ),
@@ -3202,11 +3182,13 @@ class _ClientLoginPageState extends State<ClientLoginPage> {
 class ClientPortalPage extends StatefulWidget {
   final String email;
   final String name;
+  final String role;
 
   const ClientPortalPage({
     super.key,
     required this.email,
     required this.name,
+    this.role = 'Client',
   });
 
   @override
@@ -3224,9 +3206,14 @@ class _ClientPortalPageState extends State<ClientPortalPage> {
   }
 
   Future<Map<String, dynamic>?> _fetchPortalData() async {
-    final response = await http.get(
-      Uri.parse('https://client.drishtistudios.in/api/bookings?email=${widget.email}'),
-    );
+    String url = 'https://client.drishtistudios.in/api/bookings?email=${widget.email}';
+    if (widget.role.toLowerCase() == 'admin') {
+      url = 'https://client.drishtistudios.in/api/bookings?all=true';
+    } else if (widget.role.toLowerCase() == 'crew') {
+      url = 'https://client.drishtistudios.in/api/bookings?staffEmail=${widget.email}';
+    }
+
+    final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       final bookings = data['bookings'] as List? ?? [];
@@ -3251,6 +3238,7 @@ class _ClientPortalPageState extends State<ClientPortalPage> {
     await prefs.remove('user_email');
     await prefs.remove('user_name');
     await prefs.remove('user_id');
+    await prefs.remove('user_role');
 
     if (!mounted) return;
     Navigator.of(context).pop(); // Go back to Dashboard
@@ -3266,12 +3254,7 @@ class _ClientPortalPageState extends State<ClientPortalPage> {
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-            Image.network(
-              'https://lh3.googleusercontent.com/aida-public/AB6AXuCSPYWTWsV5WuJlP-K9SKUrG7dQCVYz7CDG4mm6NnmYjrwlzKs78KfTwBmQ-Q0pUWasCrs2EQlKub1Rd8oLOt2IzRqq1DrwpnV25-Noz3pett8rhqNkyAa0ambXWfoIrGgwtt0O0p65GHZ7-Ut4gt2A_tsz2kixwUePxh5cw0nh-uBBCI90-rtFE9-Gw-QhhASixc5zJqQa2H7FxBoibK7YrGFT2vxotrLxMwPXlntEj4e2PlT-H9EZ6F3O-Zr35CzLvBNy2oerrQ',
-              height: 24,
-              fit: BoxFit.contain,
-              errorBuilder: (context, error, stackTrace) => const Icon(Icons.movie, color: Color(0xFFF2CA50)),
-            ),
+            Image.asset('assets/images/drishti_logo.png', height: 24, width: 24, fit: BoxFit.contain),
             const SizedBox(width: 8),
             Text(
               'DRISHTI STUDIO',
@@ -3347,17 +3330,34 @@ class _ClientPortalPageState extends State<ClientPortalPage> {
             final List bookingsList = data?['bookings'] ?? [];
             final double totalOutstanding = data?['totalOutstanding'] ?? 0.0;
 
-            switch (_currentTab) {
-              case 0:
-                return _buildDashboardTab(bookingsList);
-              case 1:
-                return _buildScheduleTab(bookingsList);
-              case 2:
-                return _buildFinancesTab(bookingsList, totalOutstanding);
-              case 3:
-                return _buildProfileTab();
-              default:
-                return _buildDashboardTab(bookingsList);
+            if (widget.role.toLowerCase() == 'admin' || widget.role.toLowerCase() == 'crew') {
+              switch (_currentTab) {
+                case 0:
+                  return widget.role.toLowerCase() == 'admin' 
+                      ? _buildAdminDashboardTab(bookingsList)
+                      : _buildCrewDashboardTab(bookingsList);
+                case 1:
+                  return _buildScheduleTab(bookingsList);
+                case 2:
+                  return _buildProfileTab();
+                default:
+                  return widget.role.toLowerCase() == 'admin' 
+                      ? _buildAdminDashboardTab(bookingsList)
+                      : _buildCrewDashboardTab(bookingsList);
+              }
+            } else {
+              switch (_currentTab) {
+                case 0:
+                  return _buildDashboardTab(bookingsList);
+                case 1:
+                  return _buildScheduleTab(bookingsList);
+                case 2:
+                  return _buildFinancesTab(bookingsList, totalOutstanding);
+                case 3:
+                  return _buildProfileTab();
+                default:
+                  return _buildDashboardTab(bookingsList);
+              }
             }
           },
         ),
@@ -4220,22 +4220,87 @@ class _ClientPortalPageState extends State<ClientPortalPage> {
             textAlign: TextAlign.center,
             style: GoogleFonts.outfit(color: const Color(0xFFD0C5AF), fontSize: 14),
           ),
-          const SizedBox(height: 36),
+          const SizedBox(height: 12),
+          Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF2CA50).withOpacity(0.1),
+                border: Border.all(color: const Color(0xFFF2CA50).withOpacity(0.3)),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                widget.role.toUpperCase(),
+                style: GoogleFonts.outfit(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.0,
+                  color: const Color(0xFFF2CA50),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
           Divider(color: Colors.white10),
           const SizedBox(height: 24),
-          ListTile(
-            leading: const Icon(Icons.movie_creation_outlined, color: Color(0xFFF2CA50)),
-            title: Text('Concierge Support', style: GoogleFonts.outfit()),
-            subtitle: Text('24/7 support active for members.', style: GoogleFonts.outfit(fontSize: 12)),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: const Icon(Icons.settings, color: Color(0xFFC8C6C5)),
-            title: Text('Account Settings', style: GoogleFonts.outfit()),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
-          ),
+          if (widget.role.toLowerCase() == 'admin') ...[
+            ListTile(
+              leading: const Icon(Icons.people, color: Color(0xFFF2CA50)),
+              title: Text('Manage Staff & Crew', style: GoogleFonts.outfit()),
+              subtitle: Text('Review schedules and active assignments.', style: GoogleFonts.outfit(fontSize: 12)),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.business_center, color: Color(0xFFF2CA50)),
+              title: Text('System Operations', style: GoogleFonts.outfit()),
+              subtitle: Text('Monitor server integrations and backups.', style: GoogleFonts.outfit(fontSize: 12)),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.analytics, color: Color(0xFFF2CA50)),
+              title: Text('Booking Metrics', style: GoogleFonts.outfit()),
+              subtitle: Text('View monthly performance metrics and analytics.', style: GoogleFonts.outfit(fontSize: 12)),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {},
+            ),
+          ] else if (widget.role.toLowerCase() == 'crew') ...[
+            ListTile(
+              leading: const Icon(Icons.assignment, color: Color(0xFFF2CA50)),
+              title: Text('Crew Protocols', style: GoogleFonts.outfit()),
+              subtitle: Text('Review studio protocols and equipment handling rules.', style: GoogleFonts.outfit(fontSize: 12)),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.support_agent, color: Color(0xFFF2CA50)),
+              title: Text('Contact Coordinator', style: GoogleFonts.outfit()),
+              subtitle: Text('Reach out to studio coordinators and managers.', style: GoogleFonts.outfit(fontSize: 12)),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings, color: Color(0xFFC8C6C5)),
+              title: Text('Account Settings', style: GoogleFonts.outfit()),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {},
+            ),
+          ] else ...[
+            ListTile(
+              leading: const Icon(Icons.movie_creation_outlined, color: Color(0xFFF2CA50)),
+              title: Text('Concierge Support', style: GoogleFonts.outfit()),
+              subtitle: Text('24/7 support active for members.', style: GoogleFonts.outfit(fontSize: 12)),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings, color: Color(0xFFC8C6C5)),
+              title: Text('Account Settings', style: GoogleFonts.outfit()),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {},
+            ),
+          ],
           const SizedBox(height: 48),
           Material(
             color: Colors.redAccent.withOpacity(0.1),
@@ -4291,6 +4356,7 @@ class _ClientPortalPageState extends State<ClientPortalPage> {
   // PREMIUM BOTTOM NAVIGATION
   // ==========================================
   Widget _buildBottomNavBar() {
+    final bool isAdminOrCrew = widget.role.toLowerCase() == 'admin' || widget.role.toLowerCase() == 'crew';
     return Container(
       height: 80,
       decoration: BoxDecoration(
@@ -4301,7 +4367,11 @@ class _ClientPortalPageState extends State<ClientPortalPage> {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
+        children: isAdminOrCrew ? [
+          _buildBottomNavItem(0, Icons.grid_view, 'Dashboard'),
+          _buildBottomNavItem(1, Icons.calendar_today, 'Schedule'),
+          _buildBottomNavItem(2, Icons.person, 'Profile'),
+        ] : [
           _buildBottomNavItem(0, Icons.grid_view, 'Projects'),
           _buildBottomNavItem(1, Icons.calendar_today, 'Schedule'),
           _buildBottomNavItem(2, Icons.receipt_long, 'Finances'),
@@ -4336,6 +4406,426 @@ class _ClientPortalPageState extends State<ClientPortalPage> {
               color: isActive ? const Color(0xFFF2CA50) : const Color(0xFFC8C6C5).withOpacity(0.5),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _updateBookingStatus(String bookingId, String newStatus) async {
+    setState(() {
+      _portalDataFuture = Future.value(null);
+    });
+    try {
+      final response = await http.put(
+        Uri.parse('https://client.drishtistudios.in/api/bookings/$bookingId'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'status': newStatus}),
+      );
+      if (response.statusCode == 200) {
+        setState(() {
+          _portalDataFuture = _fetchPortalData();
+        });
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Failed to update booking status')),
+          );
+        }
+        setState(() {
+          _portalDataFuture = _fetchPortalData();
+        });
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Network error. Failed to update status')),
+        );
+      }
+      setState(() {
+        _portalDataFuture = _fetchPortalData();
+      });
+    }
+  }
+
+  Widget _buildAdminDashboardTab(List bookings) {
+    final pending = bookings.where((b) => b['status'] == 'Pending').toList();
+    final confirmed = bookings.where((b) => b['status'] == 'Confirmed').toList();
+    final completed = bookings.where((b) => b['status'] == 'Completed').toList();
+
+    return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'ADMIN DASHBOARD',
+            style: GoogleFonts.outfit(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 2.0,
+              color: const Color(0xFFF2CA50),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Welcome back, ${widget.name}.',
+            style: GoogleFonts.outfit(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            'Studio operations and requests manager.',
+            style: GoogleFonts.outfit(
+              fontSize: 14,
+              color: const Color(0xFFD0C5AF),
+            ),
+          ),
+          const SizedBox(height: 24),
+
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1F1F1F),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.white10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('PENDING', style: GoogleFonts.outfit(fontSize: 10, color: const Color(0xFF8A8278), fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 4),
+                      Text('${pending.length}', style: GoogleFonts.outfit(fontSize: 20, color: const Color(0xFFF2CA50), fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1F1F1F),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.white10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('CONFIRMED', style: GoogleFonts.outfit(fontSize: 10, color: const Color(0xFF8A8278), fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 4),
+                      Text('${confirmed.length}', style: GoogleFonts.outfit(fontSize: 20, color: Colors.blueAccent, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1F1F1F),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.white10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('COMPLETED', style: GoogleFonts.outfit(fontSize: 10, color: const Color(0xFF8A8278), fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 4),
+                      Text('${completed.length}', style: GoogleFonts.outfit(fontSize: 20, color: Colors.green, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+
+          Text(
+            'PENDING REQUESTS (${pending.length})',
+            style: GoogleFonts.outfit(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.5,
+              color: const Color(0xFFD0C5AF).withOpacity(0.6),
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          if (pending.isEmpty)
+            _buildEmptyState('No pending shoot requests to confirm.')
+          else
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: pending.length,
+              separatorBuilder: (context, index) => const SizedBox(height: 12),
+              itemBuilder: (context, index) {
+                final b = pending[index];
+                final bId = b['id'] ?? '';
+                final bType = b['type'] ?? 'Session';
+                final dateStr = b['startDate'] ?? '';
+                String displayDate = dateStr;
+                try {
+                  final parsed = DateTime.parse(dateStr);
+                  displayDate = '${parsed.day}/${parsed.month}/${parsed.year}';
+                } catch (_) {}
+
+                return Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1C1C1C),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.white10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            bType.toString().toUpperCase(),
+                            style: GoogleFonts.outfit(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
+                          ),
+                          Text(
+                            displayDate,
+                            style: GoogleFonts.outfit(fontSize: 12, color: const Color(0xFFD0C5AF)),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      if (b['customer'] != null) ...[
+                        Text(
+                          'Client: ${b['customer']['name'] ?? 'Unknown'}',
+                          style: GoogleFonts.outfit(fontSize: 12, color: const Color(0xFF8A8278)),
+                        ),
+                        Text(
+                          'Email: ${b['customer']['email'] ?? ''}',
+                          style: GoogleFonts.outfit(fontSize: 12, color: const Color(0xFF8A8278)),
+                        ),
+                      ],
+                      const SizedBox(height: 12),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFFF2CA50),
+                              foregroundColor: const Color(0xFF3C2F00),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                              minimumSize: Size.zero,
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            ),
+                            onPressed: () => _updateBookingStatus(bId, 'Confirmed'),
+                            icon: const Icon(Icons.check, size: 12),
+                            label: Text('APPROVE', style: GoogleFonts.outfit(fontSize: 10, fontWeight: FontWeight.bold)),
+                          ),
+                          const SizedBox(width: 8),
+                          OutlinedButton.icon(
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: Colors.redAccent,
+                              side: const BorderSide(color: Colors.redAccent, width: 0.5),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                              minimumSize: Size.zero,
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            ),
+                            onPressed: () => _updateBookingStatus(bId, 'Cancelled'),
+                            icon: const Icon(Icons.close, size: 12),
+                            label: Text('DECLINE', style: GoogleFonts.outfit(fontSize: 10, fontWeight: FontWeight.bold)),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCrewDashboardTab(List bookings) {
+    final confirmed = bookings.where((b) => b['status'] == 'Confirmed').toList();
+    final completed = bookings.where((b) => b['status'] == 'Completed').toList();
+
+    return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'CREW DASHBOARD',
+            style: GoogleFonts.outfit(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 2.0,
+              color: const Color(0xFFF2CA50),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Welcome back, ${widget.name}.',
+            style: GoogleFonts.outfit(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            'Your assigned productions and schedules.',
+            style: GoogleFonts.outfit(
+              fontSize: 14,
+              color: const Color(0xFFD0C5AF),
+            ),
+          ),
+          const SizedBox(height: 24),
+
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1F1F1F),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.white10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('ASSIGNMENTS', style: GoogleFonts.outfit(fontSize: 10, color: const Color(0xFF8A8278), fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 4),
+                      Text('${bookings.length}', style: GoogleFonts.outfit(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1F1F1F),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.white10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('UPCOMING', style: GoogleFonts.outfit(fontSize: 10, color: const Color(0xFF8A8278), fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 4),
+                      Text('${confirmed.length}', style: GoogleFonts.outfit(fontSize: 20, color: const Color(0xFFF2CA50), fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1F1F1F),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.white10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('COMPLETED', style: GoogleFonts.outfit(fontSize: 10, color: const Color(0xFF8A8278), fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 4),
+                      Text('${completed.length}', style: GoogleFonts.outfit(fontSize: 20, color: Colors.greenAccent, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+
+          Text(
+            'MY ASSIGNED SHOOTS (${bookings.length})',
+            style: GoogleFonts.outfit(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.5,
+              color: const Color(0xFFD0C5AF).withOpacity(0.6),
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          if (bookings.isEmpty)
+            _buildEmptyState('No assigned shoots at this time.')
+          else
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: bookings.length,
+              separatorBuilder: (context, index) => const SizedBox(height: 12),
+              itemBuilder: (context, index) {
+                final b = bookings[index];
+                final bType = b['type'] ?? 'Creative Shoot';
+                final dateStr = b['startDate'] ?? '';
+                String displayDate = dateStr;
+                try {
+                  final parsed = DateTime.parse(dateStr);
+                  displayDate = '${parsed.day}/${parsed.month}/${parsed.year}';
+                } catch (_) {}
+
+                return Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1C1C1C),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.white10),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            bType.toString().toUpperCase(),
+                            style: GoogleFonts.outfit(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Shoot Date: $displayDate',
+                            style: GoogleFonts.outfit(fontSize: 12, color: const Color(0xFF8A8278)),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: b['status'] == 'Completed' ? Colors.green.withOpacity(0.1) : const Color(0xFFF2CA50).withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          b['status'].toString().toUpperCase(),
+                          style: GoogleFonts.outfit(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: b['status'] == 'Completed' ? Colors.greenAccent : const Color(0xFFF2CA50),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
         ],
       ),
     );

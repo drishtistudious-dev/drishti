@@ -194,7 +194,7 @@ export default function BookingsPage() {
                   </p>
                 )}
 
-                {b.totalAmount > 0 && (
+                {b.totalAmount > 0 && user?.role !== "Crew" && (
                   <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[rgba(242,202,80,0.06)]">
                     <div>
                       <p className="text-[10px] text-[#5a5248] uppercase tracking-widest mb-1">Total</p>

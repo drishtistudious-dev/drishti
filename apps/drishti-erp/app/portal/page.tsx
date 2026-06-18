@@ -579,12 +579,7 @@ function CrewDashboardView({ user, bookings }: { user: UserData; bookings: Booki
                           Shoot Date: {format(new Date(b.startDate), "MMMM d, yyyy")}
                         </p>
                       </div>
-                      {b.totalAmount > 0 && (
-                        <div className="text-left sm:text-right">
-                          <span className="text-[10px] text-[#5a5248] uppercase tracking-widest block">Job Budget</span>
-                          <span className="text-sm font-semibold text-white">₹{b.totalAmount.toLocaleString()}</span>
-                        </div>
-                      )}
+                      {/* Job Budget hidden for Crew */}
                     </div>
                   );
                 })}

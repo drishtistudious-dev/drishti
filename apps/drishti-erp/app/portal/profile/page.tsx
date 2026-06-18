@@ -7,6 +7,7 @@ interface UserData {
   name: string;
   email: string;
   phone?: string;
+  role?: string;
 }
 
 export default function ProfilePage() {
@@ -62,7 +63,7 @@ export default function ProfilePage() {
           <h2 className="text-xl font-semibold text-[#e5e2e1]">{user.name}</h2>
           <p className="text-[#5a5248] text-sm mt-0.5">{user.email}</p>
           <span className="mt-2 inline-block px-3 py-1 bg-[rgba(242,202,80,0.1)] border border-[rgba(242,202,80,0.2)] rounded-full text-xs text-[#f2ca50] tracking-wider">
-            Client Member
+            {user.role === "Admin" ? "Administrator" : user.role === "Crew" ? "Crew Member" : "Client Member"}
           </span>
         </div>
       </div>
