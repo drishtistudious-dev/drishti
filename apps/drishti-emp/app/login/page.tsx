@@ -18,13 +18,13 @@ export default function LoginPage() {
   const [countdown, setCountdown] = useState(0);
 
   // Password Login State
-  const [loginMode, setLoginMode] = useState<"otp" | "password">("otp");
+  const [loginMode, setLoginMode] = useState<"otp" | "password">(auth ? "otp" : "password");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
     // Initialize reCAPTCHA on component mount
-    if (!window.recaptchaVerifier) {
+    if (auth && !window.recaptchaVerifier) {
       window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
         size: 'invisible',
       });
@@ -74,6 +74,9 @@ export default function LoginPage() {
       }
 
       // 2. Trigger Firebase SMS
+      if (!auth) {
+        throw new Error("OTP Login is not configured or unavailable on this server. Please use Password Login.");
+      }
       const appVerifier = window.recaptchaVerifier;
       const result = await signInWithPhoneNumber(auth, phone, appVerifier);
       
