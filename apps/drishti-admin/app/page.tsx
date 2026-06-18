@@ -1,6 +1,9 @@
 import prisma from "@/lib/prisma";
 import { format } from "date-fns";
 import BentoGrid from "@/components/BentoGrid";
+
+export const dynamic = "force-dynamic";
+
 // Server Component
 export default async function AdminDashboard() {
   // Fetch high-level metrics

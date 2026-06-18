@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import { jwtVerify } from "jose";
 import { format } from "date-fns";
 
+export const dynamic = "force-dynamic";
+
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || "fallback_super_secret_drishti_key_123");
 
 export default async function SchedulePage() {

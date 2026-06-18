@@ -3,6 +3,8 @@ import { Users, ShieldCheck } from "lucide-react";
 import { format } from "date-fns";
 import AddStaffModal from "./AddStaffModal";
 
+export const dynamic = "force-dynamic";
+
 export default async function ClientsPage() {
   const clients = await prisma.customer.findMany({
     orderBy: { createdAt: "desc" }
