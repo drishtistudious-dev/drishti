@@ -29,6 +29,10 @@ export default function RootLayout({
   if (pathname === "/login") {
     return (
       <html lang="en">
+        <head>
+          <title>Drishti Crew Portal | Login</title>
+          <link rel="icon" href="/drishti_logo.png" />
+        </head>
         <body className={`${inter.variable} ${outfit.variable} antialiased bg-[#fdfcf9]`}>
           {children}
         </body>
@@ -46,6 +50,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <title>Drishti Crew Portal</title>
+        <link rel="icon" href="/drishti_logo.png" />
       </head>
       <body className={`${inter.variable} ${outfit.variable} antialiased flex h-screen overflow-hidden bg-[#0a0a0a] text-[#e5e2e1] selection:bg-[#f2ca50] selection:text-black`}>
         

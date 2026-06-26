@@ -33,6 +33,10 @@ export default function RootLayout({
   if (pathname === "/login") {
     return (
       <html lang="en">
+        <head>
+          <title>Drishti Admin | Login</title>
+          <link rel="icon" href="/drishti_logo.png" />
+        </head>
         <body className={`${inter.variable} ${outfit.variable} antialiased`}>
           {children}
         </body>
@@ -50,6 +54,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <title>Drishti Admin</title>
+        <link rel="icon" href="/drishti_logo.png" />
       </head>
       <body className={`${inter.variable} ${outfit.variable} antialiased flex h-screen overflow-hidden bg-[#030303] text-white selection:bg-[#f2ca50] selection:text-black`}>
         
