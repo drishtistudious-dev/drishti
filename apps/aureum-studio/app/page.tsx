@@ -543,6 +543,91 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          {/* Project 12 */}
+          <div className="col-span-6 md:col-span-4 group relative overflow-hidden h-[300px] md:h-[400px] rounded-xl md:rounded-sm border border-[#d4af37]/30 md:border-none md:glass-card md:p-2 scroll-animate">
+            <div className="w-full h-full overflow-hidden relative rounded-lg md:rounded-none">
+              <img
+                alt="Project 12"
+                className="w-full h-full object-cover md:grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                src="/studio-tour/work-12.jpg"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 md:opacity-80" />
+              <div className="absolute bottom-5 left-4 md:bottom-8 md:left-8 transition-transform duration-500 group-hover:-translate-y-2">
+                <span className="font-label-md text-[7px] md:text-label-md text-[#d4af37] mb-1 md:mb-2 block tracking-widest uppercase">BABY PORTRAITURE</span>
+                <div className="w-6 md:w-8 h-[1px] bg-[#d4af37] mb-2 md:mb-3"></div>
+                <h3 className="font-display text-lg md:text-2xl text-white">Dreamy Slumber</h3>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 13 */}
+          <div className="col-span-6 md:col-span-8 group relative overflow-hidden h-[300px] md:h-[400px] rounded-xl md:rounded-sm border border-[#d4af37]/30 md:border-none md:glass-card md:p-2 scroll-animate">
+            <div className="w-full h-full overflow-hidden relative rounded-lg md:rounded-none">
+              <img
+                alt="Project 13"
+                className="w-full h-full object-cover md:grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                src="/studio-tour/work-13.jpg"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 md:opacity-80" />
+              <div className="absolute bottom-5 left-4 md:bottom-8 md:left-8 transition-transform duration-500 group-hover:-translate-y-2">
+                <span className="font-label-md text-[7px] md:text-label-md text-[#d4af37] mb-1 md:mb-2 block tracking-widest uppercase">NEWBORN EDITORIAL</span>
+                <div className="w-6 md:w-8 h-[1px] bg-[#d4af37] mb-2 md:mb-3"></div>
+                <h3 className="font-display text-lg md:text-3xl text-white">Soft Whispers</h3>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 14 */}
+          <div className="col-span-12 md:col-span-8 group relative overflow-hidden h-[250px] md:h-[500px] rounded-xl md:rounded-sm border border-[#d4af37]/30 md:border-none md:glass-card md:p-2 scroll-animate">
+            <div className="w-full h-full overflow-hidden relative rounded-lg md:rounded-none">
+              <img
+                alt="Project 14"
+                className="w-full h-full object-cover md:grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                src="/studio-tour/work-14.jpg"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 md:opacity-80" />
+              <div className="absolute bottom-5 left-5 md:bottom-8 md:left-8 transition-transform duration-500 group-hover:-translate-y-2">
+                <span className="font-label-md text-[8px] md:text-label-md text-[#d4af37] mb-1 md:mb-2 block tracking-widest uppercase">NEWBORN DETAIL</span>
+                <div className="w-6 md:w-8 h-[1px] bg-[#d4af37] mb-2 md:mb-3"></div>
+                <h3 className="font-display text-xl md:text-3xl text-white">Tiny Miracles</h3>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 15 */}
+          <div className="col-span-12 md:col-span-4 group relative overflow-hidden h-[250px] md:h-[500px] rounded-xl md:rounded-sm border border-[#d4af37]/30 md:border-none md:glass-card md:p-2 scroll-animate">
+            <div className="w-full h-full overflow-hidden relative rounded-lg md:rounded-none">
+              <img
+                alt="Project 15"
+                className="w-full h-full object-cover md:grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                src="/studio-tour/work-15.jpg"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 md:opacity-80" />
+              <div className="absolute bottom-5 left-5 md:bottom-8 md:left-8 transition-transform duration-500 group-hover:-translate-y-2">
+                <span className="font-label-md text-[8px] md:text-label-md text-[#d4af37] mb-1 md:mb-2 block tracking-widest uppercase">BABY PORTRAITURE</span>
+                <div className="w-6 md:w-8 h-[1px] bg-[#d4af37] mb-2 md:mb-3"></div>
+                <h3 className="font-display text-xl md:text-2xl text-white">Serene Dreams</h3>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 16 */}
+          <div className="col-span-12 group relative overflow-hidden h-[300px] md:h-[500px] rounded-xl md:rounded-sm border border-[#d4af37]/30 md:border-none md:glass-card md:p-2 scroll-animate">
+            <div className="w-full h-full overflow-hidden relative rounded-lg md:rounded-none">
+              <img
+                alt="Project 16"
+                className="w-full h-full object-cover md:grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                src="/studio-tour/work-16.jpg"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 md:opacity-80" />
+              <div className="absolute bottom-5 left-5 md:bottom-8 md:left-8 transition-transform duration-500 group-hover:-translate-y-2">
+                <span className="font-label-md text-[8px] md:text-label-md text-[#d4af37] mb-1 md:mb-2 block tracking-widest uppercase">BABY PORTRAITURE</span>
+                <div className="w-6 md:w-8 h-[1px] bg-[#d4af37] mb-2 md:mb-3"></div>
+                <h3 className="font-display text-xl md:text-3xl text-white">Gentle Awakening</h3>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
