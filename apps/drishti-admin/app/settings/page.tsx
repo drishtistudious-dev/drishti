@@ -7,6 +7,11 @@ export default function SettingsPage() {
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [profileLoading, setProfileLoading] = useState(false);
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [updateLoading, setUpdateLoading] = useState(false);
@@ -23,11 +28,54 @@ export default function SettingsPage() {
       const data = await res.json();
       if (res.ok) {
         setProfile(data.staff);
+        setName(data.staff.name || "");
+        setEmail(data.staff.email || "");
+        setPhone(data.staff.phone || "");
       }
     } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleUpdateProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+
+    if (!name.trim()) {
+      setError("Name cannot be empty");
+      return;
+    }
+    if (!email.trim()) {
+      setError("Email cannot be empty");
+      return;
+    }
+    if (!phone.trim()) {
+      setError("Phone number cannot be empty");
+      return;
+    }
+
+    setProfileLoading(true);
+    try {
+      const res = await fetch("/api/staff/update-profile", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to update profile");
+      }
+
+      setSuccess("Profile details updated successfully!");
+      setProfile({ ...profile, name, email, phone });
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setProfileLoading(false);
     }
   };
 
@@ -86,44 +134,68 @@ export default function SettingsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         
-        {/* Profile Details (Read Only) */}
+        {/* Profile Details */}
         <div className="rounded-3xl bg-white/[0.02] border border-white/5 p-8 backdrop-blur-md h-fit">
           <h2 className="text-xl font-display text-white mb-6">Profile Details</h2>
           
-          <div className="space-y-6">
+          <form onSubmit={handleUpdateProfile} className="space-y-6">
             <div>
               <label className="block text-[10px] font-bold tracking-widest uppercase text-[#8a8278] mb-2 flex items-center gap-2">
                 <User size={14} /> Full Name
               </label>
-              <div className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white text-sm">
-                {profile?.name}
-              </div>
+              <input 
+                type="text" 
+                required 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#f2ca50]"
+                placeholder="Full Name"
+              />
             </div>
 
             <div>
               <label className="block text-[10px] font-bold tracking-widest uppercase text-[#8a8278] mb-2 flex items-center gap-2">
                 <Mail size={14} /> Email Address
               </label>
-              <div className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white text-sm">
-                {profile?.email}
-              </div>
+              <input 
+                type="email" 
+                required 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#f2ca50]"
+                placeholder="Email Address"
+              />
             </div>
 
             <div>
               <label className="block text-[10px] font-bold tracking-widest uppercase text-[#8a8278] mb-2 flex items-center gap-2">
                 <Phone size={14} /> Phone Number
               </label>
-              <div className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white text-sm">
-                {profile?.phone}
-              </div>
+              <input 
+                type="text" 
+                required 
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#f2ca50]"
+                placeholder="Phone Number"
+              />
             </div>
             
-            <div className="pt-2">
+            <div className="flex items-center justify-between pt-2">
                <span className="px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.2em] font-bold border border-[#f2ca50]/30 text-[#f2ca50] bg-[#f2ca50]/10">
                  {profile?.role} • {profile?.designation}
                </span>
+
+               <button 
+                 type="submit" 
+                 disabled={profileLoading}
+                 className="bg-[#f2ca50] text-black font-bold px-6 py-2.5 rounded-xl text-[10px] tracking-widest uppercase hover:bg-white transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+               >
+                 {profileLoading ? <Loader2 size={12} className="animate-spin" /> : <Save size={12} />}
+                 Save Profile
+               </button>
             </div>
-          </div>
+          </form>
         </div>
 
         {/* Security Settings */}
