@@ -492,6 +492,57 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          {/* Project 9 */}
+          <div className="col-span-12 md:col-span-8 group relative overflow-hidden h-[250px] md:h-[500px] rounded-xl md:rounded-sm border border-[#d4af37]/30 md:border-none md:glass-card md:p-2 scroll-animate">
+            <div className="w-full h-full overflow-hidden relative rounded-lg md:rounded-none">
+              <img
+                alt="Project 9"
+                className="w-full h-full object-cover md:grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                src="/studio-tour/work-9.jpeg"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 md:opacity-80" />
+              <div className="absolute bottom-5 left-5 md:bottom-8 md:left-8 transition-transform duration-500 group-hover:-translate-y-2">
+                <span className="font-label-md text-[8px] md:text-label-md text-[#d4af37] mb-1 md:mb-2 block tracking-widest uppercase">WEDDING PORTRAITURE</span>
+                <div className="w-6 md:w-8 h-[1px] bg-[#d4af37] mb-2 md:mb-3"></div>
+                <h3 className="font-display text-xl md:text-3xl text-white">Bridal Radiance</h3>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 10 */}
+          <div className="col-span-12 md:col-span-4 group relative overflow-hidden h-[250px] md:h-[500px] rounded-xl md:rounded-sm border border-[#d4af37]/30 md:border-none md:glass-card md:p-2 scroll-animate">
+            <div className="w-full h-full overflow-hidden relative rounded-lg md:rounded-none">
+              <img
+                alt="Project 10"
+                className="w-full h-full object-cover md:grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                src="/studio-tour/work-10.jpeg"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 md:opacity-80" />
+              <div className="absolute bottom-5 left-5 md:bottom-8 md:left-8 transition-transform duration-500 group-hover:-translate-y-2">
+                <span className="font-label-md text-[8px] md:text-label-md text-[#d4af37] mb-1 md:mb-2 block tracking-widest uppercase">LUXURY WEDDING</span>
+                <div className="w-6 md:w-8 h-[1px] bg-[#d4af37] mb-2 md:mb-3"></div>
+                <h3 className="font-display text-xl md:text-2xl text-white">The Silent Glance</h3>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 11 */}
+          <div className="col-span-12 group relative overflow-hidden h-[300px] md:h-[500px] rounded-xl md:rounded-sm border border-[#d4af37]/30 md:border-none md:glass-card md:p-2 scroll-animate">
+            <div className="w-full h-full overflow-hidden relative rounded-lg md:rounded-none">
+              <img
+                alt="Project 11"
+                className="w-full h-full object-cover md:grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                src="/studio-tour/work-11.jpeg"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 md:opacity-80" />
+              <div className="absolute bottom-5 left-5 md:bottom-8 md:left-8 transition-transform duration-500 group-hover:-translate-y-2">
+                <span className="font-label-md text-[8px] md:text-label-md text-[#d4af37] mb-1 md:mb-2 block tracking-widest uppercase">BRIDAL EDITORIAL</span>
+                <div className="w-6 md:w-8 h-[1px] bg-[#d4af37] mb-2 md:mb-3"></div>
+                <h3 className="font-display text-xl md:text-3xl text-white">Heritage & Grace</h3>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
